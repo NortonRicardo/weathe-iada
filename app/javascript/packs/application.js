@@ -10,6 +10,7 @@ import "channels"
 
 require ("bootstrap")
 import "../stylesheets/application"
+import "../stylesheets/loguin"
 
 document.addEventListener("turbolinks:load", function() {
     $(function () {
