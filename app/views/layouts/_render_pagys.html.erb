@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <%= render "layouts/menu_lateral" %>
+  <div class="main-panel">
+    <%= render "layouts/navbar" %>
+    <div class="content">
+      <%#= render "layouts/center_pagy" %>
+      <%= yield %>
+    </div>
+    <%= render "layouts/footer" %>
+  </div>
+</div>
