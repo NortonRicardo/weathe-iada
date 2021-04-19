@@ -11,6 +11,9 @@ import "channels"
 require ("bootstrap")
 import "../stylesheets/application"
 import "../stylesheets/loguin"
+import "../stylesheets/dashboard"
+import "../stylesheets/icons"
+
 
 document.addEventListener("turbolinks:load", function() {
     $(function () {
