@@ -18002,6 +18002,7 @@ table.tablesorter thead tr .headerSortDown {
     width: 260px;
     right: auto;
     left: 0;
+    /* margin tira o menu do local */
     margin: 0;
     border-radius: 0;
     z-index: 1032;
@@ -18013,6 +18014,7 @@ table.tablesorter thead tr .headerSortDown {
     -moz-transform: translate3d(-260px, 0, 0);
     -o-transform: translate3d(-260px, 0, 0);
     -ms-transform: translate3d(-260px, 0, 0);
+    /* aqui o que faz o menu sumir */
     transform: translate3d(-260px, 0, 0);
   }
 }
