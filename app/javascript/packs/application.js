@@ -9,10 +9,13 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 require ("bootstrap")
+require("packs/Chart")
+
 import "../stylesheets/application"
 import "../stylesheets/loguin"
 import "../stylesheets/dashboard"
 import "../stylesheets/icons"
+
 
 
 document.addEventListener("turbolinks:load", function() {

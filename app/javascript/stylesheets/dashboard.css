@@ -16836,7 +16836,7 @@ hr {
 }
 
 .table-responsive {
-  overflow: scroll;
+  /* overflow: scroll; */
   padding-bottom: 10px;
 }
 
