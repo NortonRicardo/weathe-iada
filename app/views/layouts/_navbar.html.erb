@@ -3,9 +3,7 @@
     <div class="navbar-wrapper">
       <div class="acao_check_menu" style="margin-right:15px;">
         <input type="checkbox" id="check_menu">
-        <label for="check_menu" style="margin: 0;">
-          <i class="mdi mdi-menu-open mdi-36px" id="icone_menu" style="color: #fff;"></i>
-        </label>
+        <label for="check_menu" style="margin: 0;display:none" id='check_label'></label>
       </div>
       <div class="navbar-toggle d-inline">
         <button type="button" class="navbar-toggler">
@@ -14,7 +12,7 @@
           <span class="navbar-toggler-bar bar3"></span>
         </button>
       </div>
-      <a class="navbar-brand" href="javascript:void(0)" style="position: absolute!important;">Dashboard</a>
+      <a class="navbar-brand" href="javascript:void(0)" style="position: absolute!important;margin-left: 40px;" onclick="$('#check_label').click()">Dashboard</a>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-bar navbar-kebab"></span>
