@@ -424,6 +424,12 @@
         r.push(this.respChart(c("#line-chart-example"), "Line", {
           labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
           datasets: [{
+    type: 'bar',
+    label: 'Bar Dataset',
+    data: [32, 42, 42, 213, 52, 75, 62],
+    borderColor: 'rgb(255, 99, 132)',
+    backgroundColor: 'rgba(255, 99, 132, 0.2)'
+  },{
             label: "Teste",
             fill: !0,
             backgroundColor: "rgba(0, 141, 241, 0.09)",

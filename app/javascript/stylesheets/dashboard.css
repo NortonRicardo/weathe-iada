@@ -15800,7 +15800,7 @@ img {
   display: inline-block;
   height: 40px;
   width: 40px;
-  border-radius: 50%;
+  border-radius: 30%;
   vertical-align: middle;
   overflow: hidden;
 }
