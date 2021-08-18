@@ -26,7 +26,11 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'devise'
-
+# Para tratamento de arquivo csv
+gem 'roo'
+gem 'axlsx'
+gem 'axlsx_rails'
+gem 'axlsx_styler'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

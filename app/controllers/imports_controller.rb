@@ -21,17 +21,28 @@ class ImportsController < ApplicationController
 
   # POST /imports or /imports.json
   def create
-    @import = Import.new(import_params)
-
-    respond_to do |format|
-      if @import.save
-        format.html { redirect_to @import, notice: "Import was successfully created." }
-        format.json { render :show, status: :created, location: @import }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @import.errors, status: :unprocessable_entity }
+    if params[:import][:data].present?
+      @data = []
+      params[:import][:data].each do |file|
+        File.open(file.tempfile.path).each_with_index do |linha_atual, linha|
+          if linha == 0
+          end
+        end
       end
     end
+
+
+
+
+    # respond_to do |format|
+    #   if @import.save
+    #     format.html { redirect_to @import, notice: "Import was successfully created." }
+    #     format.json { render :show, status: :created, location: @import }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @import.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /imports/1 or /imports/1.json
