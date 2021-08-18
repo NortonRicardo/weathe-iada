@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Weather Stations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Region</th>
+      <th>State</th>
+      <th>Station</th>
+      <th>Wmo code</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Altitude</th>
+      <th>Foundation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @weather_stations.each do |weather_station| %>
+      <tr>
+        <td><%= weather_station.region %></td>
+        <td><%= weather_station.state %></td>
+        <td><%= weather_station.station %></td>
+        <td><%= weather_station.wmo_code %></td>
+        <td><%= weather_station.latitude %></td>
+        <td><%= weather_station.longitude %></td>
+        <td><%= weather_station.altitude %></td>
+        <td><%= weather_station.foundation %></td>
+        <td><%= link_to 'Show', weather_station %></td>
+        <td><%= link_to 'Edit', edit_weather_station_path(weather_station) %></td>
+        <td><%= link_to 'Destroy', weather_station, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Weather Station', new_weather_station_path %>

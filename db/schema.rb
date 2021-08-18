@@ -10,12 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_002919) do
+ActiveRecord::Schema.define(version: 2021_08_18_103226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "imports", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tb_weather_station", force: :cascade do |t|
+    t.string "region"
+    t.string "state"
+    t.string "station"
+    t.string "wmo_code"
+    t.string "latitude"
+    t.string "longitude"
+    t.string "altitude"
+    t.date "foundation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

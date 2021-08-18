@@ -31,7 +31,7 @@ class ImportsController < ApplicationController
       end
     end
 
-
+  # rails generate scaffold WeatherStation region:strins, state:string, station:string, wmo_code:string, latitude:string, longitude:string, altitude:string, foundation:date
 
 
     # respond_to do |format|
