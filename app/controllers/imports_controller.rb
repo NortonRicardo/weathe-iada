@@ -30,8 +30,9 @@ class ImportsController < ApplicationController
         end
       end
     end
-
-  # rails generate scaffold WeatherStation region:strins, state:string, station:string, wmo_code:string, latitude:string, longitude:string, altitude:string, foundation:date
+    # t.time :hora_inicio_programada, null: false, comment: 'Hora do início da entrevista'
+    #
+    # rails generate scaffold WeatherData data:date, hora:time, prec_total_horario:float, pres_atmos_nivel_estacao:float, pres_atmos_max:float, pres_atmos_min:float, radiacao_global:float, temp_ar_bulso_seco:float, temp_ponto_orvalho:float, temp_min_hora_ant:float, temp_monima_hora_ant:float, temp_orvalho_max_hora_ant:float, temp_orvalho_min_hora_ant:float, umid_rel_max_hora_ant:float, umid_rel_min_hora_ant:float, umid_relativa_ar:float, vento_direcao_horario:float, vento_rajada_maxima:float, vento_velocidade_horario:float
 
 
     # respond_to do |format|

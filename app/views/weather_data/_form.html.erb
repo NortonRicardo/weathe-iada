@@ -1,0 +1,112 @@
+<%= form_with(model: weather_datum) do |form| %>
+  <% if weather_datum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(weather_datum.errors.count, "error") %> prohibited this weather_datum from being saved:</h2>
+
+      <ul>
+        <% weather_datum.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :data %>
+    <%= form.text_field :data %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hora %>
+    <%= form.text_field :hora %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prec_total_horario %>
+    <%= form.text_field :prec_total_horario %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pres_atmos_nivel_estacao %>
+    <%= form.text_field :pres_atmos_nivel_estacao %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pres_atmos_max %>
+    <%= form.text_field :pres_atmos_max %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pres_atmos_min %>
+    <%= form.text_field :pres_atmos_min %>
+  </div>
+
+  <div class="field">
+    <%= form.label :radiacao_global %>
+    <%= form.text_field :radiacao_global %>
+  </div>
+
+  <div class="field">
+    <%= form.label :temp_ar_bulso_seco %>
+    <%= form.text_field :temp_ar_bulso_seco %>
+  </div>
+
+  <div class="field">
+    <%= form.label :temp_ponto_orvalho %>
+    <%= form.text_field :temp_ponto_orvalho %>
+  </div>
+
+  <div class="field">
+    <%= form.label :temp_min_hora_ant %>
+    <%= form.text_field :temp_min_hora_ant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :temp_monima_hora_ant %>
+    <%= form.text_field :temp_monima_hora_ant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :temp_orvalho_max_hora_ant %>
+    <%= form.text_field :temp_orvalho_max_hora_ant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :temp_orvalho_min_hora_ant %>
+    <%= form.text_field :temp_orvalho_min_hora_ant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :umid_rel_max_hora_ant %>
+    <%= form.text_field :umid_rel_max_hora_ant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :umid_rel_min_hora_ant %>
+    <%= form.text_field :umid_rel_min_hora_ant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :umid_relativa_ar %>
+    <%= form.text_field :umid_relativa_ar %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vento_direcao_horario %>
+    <%= form.text_field :vento_direcao_horario %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vento_rajada_maxima %>
+    <%= form.text_field :vento_rajada_maxima %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vento_velocidade_horario %>
+    <%= form.text_field :vento_velocidade_horario %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
