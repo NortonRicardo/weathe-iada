@@ -1,10 +1,9 @@
-class Import < ApplicationRecord
+class ImportDatum < ApplicationRecord
   # main config ...............................................................
-  self.table_name = "tb_import"
-  self.sequence_name = "tb_import_seq"
+  self.table_name = "tb_import_data"
+  self.sequence_name = "tb_import_data_seq"
   # relationships .............................................................
-  has_many :import_datas, class_name: 'ImportDatum', foreign_key: :tb_import_id
+  belongs_to :import, class_name: 'Import', foreign_key: :tb_import_id
   # validations ...............................................................
-  validates :cdg_import, uniqueness: true, presence: true
   # callbacks .................................................................
 end

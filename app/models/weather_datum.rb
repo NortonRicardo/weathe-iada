@@ -5,13 +5,19 @@ class WeatherDatum < ApplicationRecord
   # relationships .............................................................
   belongs_to :weather_station, class_name: 'WeatherStation', foreign_key: :tb_weather_station_id
   # validations ...............................................................
-  # validates_uniqueness_of :wmo_code
-  # validates_presence_of :region,
-  #                       :state,
-  #                       :station,
-  #                       :wmo_code,
-  #                       :latitude,
-  #                       :longitude,
-  #                       :altitude
+  validates_presence_of :tb_weather_station_id
   # callbacks .................................................................
+  before_create :set_ano_mes
+
+  def hora_time
+    self.hora.to_formatted_s(:time)
+  end
+
+  private
+    def set_ano_mes
+      self.ano = self.data.strftime("%Y")
+      self.mes = self.data.strftime("%m")
+      self.dia = self.data.strftime("%d")
+    end
+
 end

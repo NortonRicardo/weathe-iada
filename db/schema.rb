@@ -10,15 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_111929) do
+ActiveRecord::Schema.define(version: 2021_08_19_150651) do
 
-  create_table "imports", charset: "utf8mb3", force: :cascade do |t|
+  create_table "tb_import", charset: "utf8mb3", force: :cascade do |t|
+    t.float "total_files", comment: "Total de Arquivos"
+    t.string "cdg_import", comment: "Indentificador unico do import"
+    t.boolean "termino", default: false, comment: "Indentifica se terminou o processo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tb_import_data", charset: "utf8mb3", force: :cascade do |t|
+    t.float "total", comment: "Total de registros a serem importados"
+    t.float "sucess", comment: "Sucesso na importação do Registro"
+    t.float "erros", comment: "Erros na importação do Registro"
+    t.float "order_file", comment: "Erros na importação do Registro"
+    t.bigint "tb_import_id", comment: "Relacionamento com Import"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tb_import_id"], name: "index_tb_import_data_on_tb_import_id"
+  end
+
   create_table "tb_weather_data", charset: "utf8mb3", force: :cascade do |t|
     t.date "data", comment: "Data da Leitura"
+    t.string "ano", comment: "Ano"
+    t.string "mes", comment: "Mes"
+    t.string "dia", comment: "Dia"
     t.time "hora", comment: "Hora da Leitura"
     t.float "prec_total_horario", comment: "PRECIPITA«√O TOTAL, HOR¡RIO (mm)"
     t.float "pres_atmos_nivel_estacao", comment: "PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB)"

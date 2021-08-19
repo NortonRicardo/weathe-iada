@@ -13115,7 +13115,7 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
   background-color: #008df1;
   transition: all 0.15s ease;
   box-shadow: none;
-  color: #ffffff;
+  color: #ffffff!important;
 }
 
 .btn-primary.animation-on-hover:hover {
@@ -18536,7 +18536,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 
 .modal.show .modal-dialog {
   -webkit-transform: translate(0, 30%);
-  transform: translate(0, 30%);
+  transform: translate(0, 0);
 }
 
 code {

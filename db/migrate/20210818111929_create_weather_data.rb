@@ -3,6 +3,9 @@ class CreateWeatherData < ActiveRecord::Migration[6.1]
     unless table_exists? WeatherDatum.table_name
       create_table WeatherDatum.table_name do |t|
         t.date :data                           , comment: 'Data da Leitura'
+        t.string :ano                          , comment: 'Ano'
+        t.string :mes                          , comment: 'Mes'
+        t.string :dia                          , comment: 'Dia'
         t.time :hora                           , comment: 'Hora da Leitura'
         t.float :prec_total_horario            , comment: 'PRECIPITA«√O TOTAL, HOR¡RIO (mm)'
         t.float :pres_atmos_nivel_estacao      , comment: 'PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB)'
