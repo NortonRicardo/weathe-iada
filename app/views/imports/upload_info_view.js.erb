@@ -1,0 +1,21 @@
+<% @import = Import.find_by(cdg_import: params[:cdg_import]) %>
+<% @import_data = @import&.import_datas %>
+
+<% if @import_data.present? %>
+  $("#render_info_import").html("<%= j(render('progress_upload', files: @import_data, import: @import)) %>");
+<% end %>
+
+
+console.log('entrei')
+
+function pesquisa_status() {
+    $.ajax({
+        type: 'GET',
+        url: '<%= upload_info_view_imports_path %>',
+        data: {cdg_import: <%= params[:cdg_import] %>}
+    });
+}
+
+<% unless @import&.termino == true %>
+  setTimeout( pesquisa_status() , 229000);
+<% end  %>

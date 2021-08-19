@@ -1,0 +1,57 @@
+<%= form_with(model: weather_station) do |form| %>
+  <% if weather_station.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(weather_station.errors.count, "error") %> prohibited this weather_station from being saved:</h2>
+
+      <ul>
+        <% weather_station.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :region %>
+    <%= form.text_field :region %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :station %>
+    <%= form.text_field :station %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wmo_code %>
+    <%= form.text_field :wmo_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :altitude %>
+    <%= form.text_field :altitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :foundation %>
+    <%= form.date_select :foundation %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @weather_station.region %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @weather_station.state %>
+</p>
+
+<p>
+  <strong>Station:</strong>
+  <%= @weather_station.station %>
+</p>
+
+<p>
+  <strong>Wmo code:</strong>
+  <%= @weather_station.wmo_code %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @weather_station.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @weather_station.longitude %>
+</p>
+
+<p>
+  <strong>Altitude:</strong>
+  <%= @weather_station.altitude %>
+</p>
+
+<p>
+  <strong>Foundation:</strong>
+  <%= @weather_station.foundation %>
+</p>
+
+<%= link_to 'Edit', edit_weather_station_path(@weather_station) %> |
+<%= link_to 'Back', weather_stations_path %>

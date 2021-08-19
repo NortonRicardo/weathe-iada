@@ -1,0 +1,99 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @weather_datum.data %>
+</p>
+
+<p>
+  <strong>Hora:</strong>
+  <%= @weather_datum.hora %>
+</p>
+
+<p>
+  <strong>Prec total horario:</strong>
+  <%= @weather_datum.prec_total_horario %>
+</p>
+
+<p>
+  <strong>Pres atmos nivel estacao:</strong>
+  <%= @weather_datum.pres_atmos_nivel_estacao %>
+</p>
+
+<p>
+  <strong>Pres atmos max:</strong>
+  <%= @weather_datum.pres_atmos_max %>
+</p>
+
+<p>
+  <strong>Pres atmos min:</strong>
+  <%= @weather_datum.pres_atmos_min %>
+</p>
+
+<p>
+  <strong>Radiacao global:</strong>
+  <%= @weather_datum.radiacao_global %>
+</p>
+
+<p>
+  <strong>Temp ar bulso seco:</strong>
+  <%= @weather_datum.temp_ar_bulso_seco %>
+</p>
+
+<p>
+  <strong>Temp ponto orvalho:</strong>
+  <%= @weather_datum.temp_ponto_orvalho %>
+</p>
+
+<p>
+  <strong>Temp min hora ant:</strong>
+  <%= @weather_datum.temp_min_hora_ant %>
+</p>
+
+<p>
+  <strong>Temp monima hora ant:</strong>
+  <%= @weather_datum.temp_monima_hora_ant %>
+</p>
+
+<p>
+  <strong>Temp orvalho max hora ant:</strong>
+  <%= @weather_datum.temp_orvalho_max_hora_ant %>
+</p>
+
+<p>
+  <strong>Temp orvalho min hora ant:</strong>
+  <%= @weather_datum.temp_orvalho_min_hora_ant %>
+</p>
+
+<p>
+  <strong>Umid rel max hora ant:</strong>
+  <%= @weather_datum.umid_rel_max_hora_ant %>
+</p>
+
+<p>
+  <strong>Umid rel min hora ant:</strong>
+  <%= @weather_datum.umid_rel_min_hora_ant %>
+</p>
+
+<p>
+  <strong>Umid relativa ar:</strong>
+  <%= @weather_datum.umid_relativa_ar %>
+</p>
+
+<p>
+  <strong>Vento direcao horario:</strong>
+  <%= @weather_datum.vento_direcao_horario %>
+</p>
+
+<p>
+  <strong>Vento rajada maxima:</strong>
+  <%= @weather_datum.vento_rajada_maxima %>
+</p>
+
+<p>
+  <strong>Vento velocidade horario:</strong>
+  <%= @weather_datum.vento_velocidade_horario %>
+</p>
+
+<%= link_to 'Edit', edit_weather_datum_path(@weather_datum) %> |
+<%= link_to 'Back', weather_data_path %>

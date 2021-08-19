@@ -1,0 +1,110 @@
+<%= form_with(model: import,
+               local: true,
+               remote: true,
+               multipart: true) do |form| %>
+
+  <% @cdg_import = DateTime.now.strftime("%m%d%Y%I%M%S").to_i %>
+
+  <%= form.hidden_field :cdg_import, value: @cdg_import %>
+
+  <%= form.file_field :data,
+                      class:"",
+                      id: "upload_file",
+                      multiple: true,
+                      remote: true,
+                      style: 'display: none!important;',
+                      accept:".CSV" %>
+
+  <div class="card-body">
+    <div class="dropzone dz-clickable">
+      <div class="dz-message needsclick" onclick="$('#upload_file').click()">
+        <i class="h1 text-muted dripicons-cloud-upload"></i>
+        <h3>Clique para subir os arquivos</h3>
+      </div>
+    </div>
+    <div id="render_files"></div>
+  </div>
+  <div class="actions">
+    <%= form.submit "Processar",
+                    class: 'btn btn-sucess',
+                    id:'submit_files_upload',
+                    'data-toggle':"modal",
+                    'data-target':"#exampleModalCenter",
+                    onclick:'setTimeout( pesquisa_status() , 10000);'%>
+  </div>
+<% end %>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Importação de Arquivos - Progresso </h5>
+      </div>
+      <div class="modal-body" id="render_info_import">
+        <div style="align-items: center;text-align: center;display: inline-flex;padding-left: 30%;">
+          <div class='spinner-border' role='status' style="margin-right: 15px;">
+            <span class='visually-hidden'></span>
+          </div>
+          Processando Aguarde...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+  var input = document.getElementById("upload_file");
+
+  input.addEventListener("change", function(){
+      var nome = "Não há arquivo selecionado. Selecionar arquivo...";
+      if(input.files.length > 0)
+      {
+        document.getElementById('render_files').innerHTML = ''
+
+        for (var i = 0; i < input.files.length; i++) {
+
+          document.getElementById('render_files').innerHTML += '<div class="dropzone-previews mt-3">'+
+            '<div class="card mt-1 mb-0 shadow-none border dz-processing dz-error dz-complete">'+
+                    '<div class="p-2">'+
+                        '<div class="row align-items-center">'+
+                            '<div class="col-auto">'+
+                                '<img data-dz-thumbnail="" class="avatar-sm rounded bg-light" alt="">'+
+                            '</div>'+
+                            '<div class="col pl-0">'+
+                                '<a href="javascript:void(0);"class="font-weight-bold"style="color: rgba(255, 255, 255, 0.8);" >'+ input.files[i].name +'</a>'+
+                                '<p class="mb-0" data-dz-size=""><strong>0.5</strong> MB</p>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</div>'
+        }
+
+      }
+
+
+  });
+
+  // <!--      <div class="modal-footer">-->
+  // <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+  // <!--        <button type="button" class="btn btn-primary">Save changes</button>-->
+  // <!--      </div>-->
+
+  // var button_subimit = document.getElementById("submit_files_upload");
+  //
+  // button_subimit.addEventListener("onclick", function(){
+  //
+  //
+  // })
+
+
+  function pesquisa_status() {
+      $.ajax({
+          type: 'GET',
+          url: '<%= upload_info_view_imports_path %>',
+          data: {cdg_import: <%= @cdg_import %>}
+      });
+  }
+</script>

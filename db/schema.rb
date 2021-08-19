@@ -10,12 +10,70 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_104411) do
+ActiveRecord::Schema.define(version: 2021_08_19_150651) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "tb_import", charset: "utf8mb3", force: :cascade do |t|
+    t.float "total_files", comment: "Total de Arquivos"
+    t.string "cdg_import", comment: "Indentificador unico do import"
+    t.boolean "termino", default: false, comment: "Indentifica se terminou o processo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
-  create_table "users", force: :cascade do |t|
+  create_table "tb_import_data", charset: "utf8mb3", force: :cascade do |t|
+    t.float "total", comment: "Total de registros a serem importados"
+    t.float "sucess", comment: "Sucesso na importação do Registro"
+    t.float "erros", comment: "Erros na importação do Registro"
+    t.float "order_file", comment: "Erros na importação do Registro"
+    t.bigint "tb_import_id", comment: "Relacionamento com Import"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tb_import_id"], name: "index_tb_import_data_on_tb_import_id"
+  end
+
+  create_table "tb_weather_data", charset: "utf8mb3", force: :cascade do |t|
+    t.date "data", comment: "Data da Leitura"
+    t.string "ano", comment: "Ano"
+    t.string "mes", comment: "Mes"
+    t.string "dia", comment: "Dia"
+    t.time "hora", comment: "Hora da Leitura"
+    t.float "prec_total_horario", comment: "PRECIPITA«√O TOTAL, HOR¡RIO (mm)"
+    t.float "pres_atmos_nivel_estacao", comment: "PRESSAO ATMOSFERICA AO NIVEL DA ESTACAO, HORARIA (mB)"
+    t.float "pres_atmos_max", comment: "PRESS√O ATMOSFERICA MAX.NA HORA ANT. (AUT) (mB)"
+    t.float "pres_atmos_min", comment: "PRESS√O ATMOSFERICA MIN. NA HORA ANT. (AUT) (mB)"
+    t.float "radiacao_global", comment: "RADIACAO GLOBAL (KJ/m≤)"
+    t.float "temp_ar_bulso_seco", comment: "TEMPERATURA DO AR - BULBO SECO, HORARIA (∞C)"
+    t.float "temp_ponto_orvalho", comment: "TEMPERATURA DO PONTO DE ORVALHO (∞C)"
+    t.float "temp_min_hora_ant", comment: "TEMPERATURA M¡XIMA NA HORA ANT. (AUT) (∞C)"
+    t.float "temp_monima_hora_ant", comment: "TEMPERATURA MÕNIMA NA HORA ANT. (AUT) (∞C)"
+    t.float "temp_orvalho_max_hora_ant", comment: "TEMPERATURA ORVALHO MAX. NA HORA ANT. (AUT) (∞C)"
+    t.float "temp_orvalho_min_hora_ant", comment: "TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (∞C)"
+    t.float "umid_rel_max_hora_ant", comment: "UMIDADE REL. MAX. NA HORA ANT. (AUT) (%)"
+    t.float "umid_rel_min_hora_ant", comment: "UMIDADE REL. MIN. NA HORA ANT. (AUT) (%)"
+    t.float "umid_relativa_ar", comment: "UMIDADE RELATIVA DO AR, HORARIA (%)"
+    t.float "vento_direcao_horario", comment: "VENTO, DIRE«√O HORARIA (gr) (∞ (gr))"
+    t.float "vento_rajada_maxima", comment: "VENTO, RAJADA MAXIMA (m/s)"
+    t.float "vento_velocidade_horario", comment: "VENTO, VELOCIDADE HORARIA (m/s)"
+    t.bigint "tb_weather_station_id", comment: "Relacionamento com estacao climativa"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tb_weather_station_id"], name: "index_tb_weather_data_on_tb_weather_station_id"
+  end
+
+  create_table "tb_weather_station", charset: "utf8mb3", force: :cascade do |t|
+    t.string "region", comment: "REGIAO"
+    t.string "state", comment: "UF"
+    t.string "station", comment: "ESTADO"
+    t.string "wmo_code", comment: "CODIGO (WMO)"
+    t.string "latitude", comment: "LATITUDE"
+    t.string "longitude", comment: "LONGITUDE"
+    t.string "altitude", comment: "ALTITUDE"
+    t.date "foundation", comment: "DATA DE FUNDACAO"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -23,8 +81,6 @@ ActiveRecord::Schema.define(version: 2021_04_17_104411) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

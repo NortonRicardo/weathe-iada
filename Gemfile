@@ -7,6 +7,8 @@ ruby '3.0.1'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
+# Use mysql as the database for Active Record
+gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -26,7 +28,11 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'devise'
-
+# Para tratamento de arquivo csv
+gem 'roo'
+gem 'axlsx'
+gem 'axlsx_rails'
+gem 'axlsx_styler'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

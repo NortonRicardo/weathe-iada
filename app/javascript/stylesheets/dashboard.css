@@ -13115,7 +13115,7 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
   background-color: #008df1;
   transition: all 0.15s ease;
   box-shadow: none;
-  color: #ffffff;
+  color: #ffffff!important;
 }
 
 .btn-primary.animation-on-hover:hover {
@@ -18536,7 +18536,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 
 .modal.show .modal-dialog {
   -webkit-transform: translate(0, 30%);
-  transform: translate(0, 30%);
+  transform: translate(0, 0);
 }
 
 code {
@@ -20465,4 +20465,17 @@ Copyright (c) 2015 Daniel Eden
   padding-right: 0;
 }
 
+.dropzone {
+  border: 2px dashed #dee2e6;
+  background: #27293d;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 150px;
+  padding: 20px; }
+  .dropzone .dz-message {
+    text-align: center;
+    margin: 2rem 0; }
+  .dropzone.dz-started .dz-message {
+    display: none; }
+    
 /*# sourceMappingURL=dashboard-free.css.map */
