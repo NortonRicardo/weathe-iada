@@ -14,10 +14,10 @@ development:
 production:
   <<: *default
 
-test:
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: weathe_iada_test
+#test:
+#  adapter: postgresql
+#  encoding: unicode
+#  pool: <%#= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#  database: weathe_iada_test
 
 
