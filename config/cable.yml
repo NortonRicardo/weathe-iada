@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  url: <%= ENV.fetch("REDIS_URL") { "redis://:pbc1ad979199760ed39137274b662c0623909839fe0d0312b29804ab496e3063b@ec2-54-159-210-48.compute-1.amazonaws.com:8110" } %>
   channel_prefix: weathe_iada_production
