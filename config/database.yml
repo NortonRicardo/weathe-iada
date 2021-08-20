@@ -31,6 +31,7 @@ development:
 
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
 
 #test:
 #  adapter: postgresql

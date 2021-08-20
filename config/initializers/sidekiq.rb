@@ -1,30 +1,24 @@
-# # require 'resque/server'
-# #
-# if Rails.env.development?
-#   Resque.redis = Redis.new(host: 'localhost', port: '6379')
-# else
-#   REDIS = Redis.new(host: uri.host, port: uri.port, password: uri.password)
-#   Resque.redis = REDIS
-# end
+equire "sidekiq/web"
 
-# local_redis = ENV.fetch("REDIS_URL") if ENV["REDIS_URL"].present?
-
-# if local_redis.present?
-#   paramet
-# else
-#
-# end
-
-
-def conexao_redis()
-  Sidekiq.configure_server do |config|
-    config.redis = {url: 'redis://:pbc1ad979199760ed39137274b662c0623909839fe0d0312b29804ab496e3063b@ec2-54-159-210-48.compute-1.amazonaws.com:8110', password: 'pbc1ad979199760ed39137274b662c0623909839fe0d0312b29804ab496e3063b'}
-  end
-
-  Sidekiq.configure_client do |config|
-    # config.redis = {url: 'redis://localhost:6379/0'}
-    config.redis = {url: 'redis://:pbc1ad979199760ed39137274b662c0623909839fe0d0312b29804ab496e3063b@ec2-54-159-210-48.compute-1.amazonaws.com:8110', password: 'pbc1ad979199760ed39137274b662c0623909839fe0d0312b29804ab496e3063b'}
-  end
+def sha256_digest(value)
+  ::Digest::SHA256.hexdigest(value)
 end
 
-conexao_redis()
+def secure_compare(string, key)
+  sidekiq_web_credentials = Rails.application.secrets.sidekiq
+  expected_credential = sidekiq_web_credentials && sidekiq_web_credentials[key]
+  return false if [string, expected_credential].any?(&:nil?)
+
+  ActiveSupport::SecurityUtils.secure_compare(
+    sha256_digest(string),
+    sha256_digest(expected_credential)
+  )
+end
+
+mount Sidekiq::Web => "/sidekiq"
+
+if %w[staging production].include?(Rails.env)
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    secure_compare(username, :username) & secure_compare(password, :password)
+  end
+end
