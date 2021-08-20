@@ -14,6 +14,8 @@
 # heroku ps:scale web=1
 # heroku ps:scale worker+1
 
+ # bundle exec rake assets:precompile
+ 
 default: &default
   adapter:  mysql2
   encoding: utf8
@@ -35,5 +37,3 @@ production:
 #  encoding: unicode
 #  pool: <%#= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 #  database: weathe_iada_test
-
-
