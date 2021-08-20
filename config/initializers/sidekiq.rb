@@ -1,7 +1,9 @@
-# Sidekiq.configure_server do |config|
-#   config.redis = { url: 'redis://localhost:6379' }
-# end
-#
-# Sidekiq.configure_client do |config|
-#   config.redis = { url: 'redis://localhost:6379' }
-# end
+require 'resque/server'
+
+if Rails.env.development?
+  Resque.redis = Redis.new(host: 'localhost', port: '6379')
+else
+  uri = URI.parse(ENV['REDIS_URL'])
+  REDIS = Redis.new(host: uri.host, port: uri.port, password: uri.password)
+  Resque.redis = REDIS
+end
