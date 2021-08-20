@@ -1,24 +1,14 @@
 require "sidekiq/web"
 
-def sha256_digest(value)
-  ::Digest::SHA256.hexdigest(value)
+SIDEKIQ_REDIS_CONFIGURATION = {
+  url: ENV[ENV["REDIS_URL"]], # if one assumes that REDIS_PROVIDER indirection is reliably present
+  ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }, # we must trust Heroku and AWS here
+}
+
+Sidekiq.configure_server do |config|
+  config.redis = SIDEKIQ_REDIS_CONFIGURATION
 end
 
-def secure_compare(string, key)
-  sidekiq_web_credentials = Rails.application.secrets.sidekiq
-  expected_credential = sidekiq_web_credentials && sidekiq_web_credentials[key]
-  return false if [string, expected_credential].any?(&:nil?)
-
-  ActiveSupport::SecurityUtils.secure_compare(
-    sha256_digest(string),
-    sha256_digest(expected_credential)
-  )
-end
-
-mount Sidekiq::Web => "/sidekiq"
-
-if %w[staging production].include?(Rails.env)
-  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-    secure_compare(username, :username) & secure_compare(password, :password)
-  end
+Sidekiq.configure_client do |config|
+  config.redis = SIDEKIQ_REDIS_CONFIGURATION
 end
