@@ -28,6 +28,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+gem 'redis'
+gem 'sidekiq'
+
 gem 'devise'
 # Para tratamento de arquivo csv
 gem 'roo'
