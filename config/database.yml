@@ -10,7 +10,7 @@
 # git push heroku main
 
 #heroku logs --tail
-
+#  heroku addons:create heroku-redis:hobby-dev -a weathe-iada
 # heroku ps:scale web=1
 # heroku ps:scale worker+1
 #url: <%#= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
