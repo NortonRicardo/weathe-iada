@@ -3,6 +3,7 @@
 #heroku config:add DATABASE_URL=mysql2://norton:nortonbixinha@137.184.18.216:3306/norton
 #heroku config:add SHARED_DATABASE_URL=mysql2://norton:nortonbixinha@137.184.18.216:3306/norton
 #heroku restart
+#git push heroku main
 
 default: &default
   adapter:  mysql2
