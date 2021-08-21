@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(version: 2021_08_19_150651) do
 
   create_table "tb_import", charset: "utf8mb3", force: :cascade do |t|
-    t.float "total_files", comment: "Total de Arquivos"
     t.string "cdg_import", comment: "Indentificador unico do import"
     t.boolean "termino", default: false, comment: "Indentifica se terminou o processo"
     t.datetime "created_at", precision: 6, null: false
@@ -21,10 +20,11 @@ ActiveRecord::Schema.define(version: 2021_08_19_150651) do
   end
 
   create_table "tb_import_data", charset: "utf8mb3", force: :cascade do |t|
-    t.float "total", comment: "Total de registros a serem importados"
-    t.float "sucess", comment: "Sucesso na importação do Registro"
-    t.float "erros", comment: "Erros na importação do Registro"
-    t.float "order_file", comment: "Erros na importação do Registro"
+    t.float "total", default: 0.0, comment: "Total de registros a serem importados"
+    t.float "erros", default: 0.0, comment: "Erros na importação do Registro"
+    t.float "sucess", default: 0.0, comment: "Sucesso na importação do Registro"
+    t.string "path_file", default: "", comment: "Sucesso na importação do Registro"
+    t.boolean "finish", default: false, comment: "Erros na importação do Registro"
     t.bigint "tb_import_id", comment: "Relacionamento com Import"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
