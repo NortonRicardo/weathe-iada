@@ -18,6 +18,10 @@
 /*     brand Colors              */
 /* navbar color */
 :root {
+  --bodyColor: #292a2b;
+  --borderFormEls: hsl(0, 0%, 10%);
+  --bgFormEls: hsl(0, 0%, 14%);
+  --bgFormElsFocus: hsl(0, 7%, 20%);
   --blue: #5e72e4;
   --indigo: #5603ad;
   --purple: #8965e0;
@@ -20477,5 +20481,96 @@ Copyright (c) 2015 Daniel Eden
     margin: 2rem 0; }
   .dropzone.dz-started .dz-message {
     display: none; }
-    
+
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: #45485d;
+  color: white;
+}
+
+.select2-dropdown {
+  background-color: #27293d;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  left: -100000px;
+  width: 100%;
+  z-index: 1051;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  display: block;
+  padding-left: 8px;
+  padding-right: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: #27293d;
+  color: #ffff!important;
+  border-radius: 4px;
+}
+.select2-container--default .select2-selection--single {
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  height: 30px;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  border: 1px solid #aaa;
+  background-color: #27293d;
+  color: #ffff!important;
+  border-radius: 4px;
+}
+
+.select2-search__field:focus {
+  background-color: #27293d!important;
+  outline: 0;
+}
+
+.select2-container--default .select2-selection--multiple {
+  background-color: #27293d;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  cursor: text;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  position: relative;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border: solid #fff 1px;
+  outline: 0;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #27293d;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-left: 5px;
+  margin-top: 5px;
+  padding: 0;
+  padding-left: 20px;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.select2-container--default .select2-results__option--selected {
+  background-color: #52556d;
+  border: 5px #fff;
+}
+.select2-container--default .select2-search--inline .select2-search__field {
+  background: transparent;
+  border: none;
+  outline: 0;
+  box-shadow: none;
+  -webkit-appearance: textfield;
+  color: #fff;
+}
 /*# sourceMappingURL=dashboard-free.css.map */

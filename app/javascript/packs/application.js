@@ -10,6 +10,20 @@ import "channels"
 
 require ("bootstrap")
 require("packs/Chart")
+require("packs/sweetalert")
+
+import $ from 'jquery'
+import 'select2'
+import 'select2/dist/css/select2.css'
+
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+// import 'sweetalert2/src/sweetalert2.scss'
+window.Swal = Swal;
+
+window.addEventListener('DOMContentLoaded', () => {
+    $('.select2').select2()
+    $('.select2-multiple').select2({ multiple: true })
+})
 
 import "../stylesheets/application"
 import "../stylesheets/loguin"
@@ -24,6 +38,10 @@ document.addEventListener("turbolinks:load", function() {
         $('[data-toggle="popover"]').popover()
     })
 })
+
+
+$('.select2').select2()
+$('.select2-multiple').select2({ multiple: true })
 
 Rails.start()
 Turbolinks.start()
