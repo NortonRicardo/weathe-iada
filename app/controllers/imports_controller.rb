@@ -20,11 +20,10 @@ class ImportsController < ApplicationController
   end
 
   def upload_info_view
-    sleep 4
+    # sleep 4
     @cdg_import = params[:cdg_import]
     @import = Import.find_by(cdg_import: @cdg_import)
     @import_data = @import&.import_datas
-
   end
 
   # POST /imports or /imports.json
