@@ -78,8 +78,9 @@ class ImportsController < ApplicationController
         #monta caminho com nome do arquivo a ser processado
         file_path_to_save_to = "public/import/#{import_data.path_file}"
         #Salva o arquivo localmente para ser processardo no sidekiq
-        File.write(file_path_to_save_to, file.read.force_encoding("UTF-8"))
-
+        puts 'norton aqui processo de salvar '
+        a = File.write(file_path_to_save_to, file.read.force_encoding("UTF-8"))
+        puts a
         #counta quantas linhas tem o arquivo
         count_row = (File.open(file.tempfile.path)&.count-9)
         #atualiza objeto
