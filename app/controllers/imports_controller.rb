@@ -71,6 +71,10 @@ class ImportsController < ApplicationController
 
         #arualiza path do arquivo a ser salvo
         import_data.update_column(:path_file, "#{Date.today.strftime("%Y_%m_%d")}_#{import_data.id}")
+        #Verifica se caminho Exite se nao cria
+        unless File.directory?('public/import')
+          FileUtils.mkdir_p('public/import')
+        end
         #monta caminho com nome do arquivo a ser processado
         file_path_to_save_to = "public/import/#{import_data.path_file}"
         #Salva o arquivo localmente para ser processardo no sidekiq
