@@ -54,7 +54,7 @@ class ImportFilesWeatherJob < ApplicationJob
     end
 
     # Apaga o arquivo que tinha cido salvo localmente
-    FileUtils.rm_rf(Dir.glob("public/import/#{file.path_file}"))
+    # FileUtils.rm_rf(Dir.glob("public/import/#{file.path_file}"))
 
     return data
   end
