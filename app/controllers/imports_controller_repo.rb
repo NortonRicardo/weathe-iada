@@ -1,4 +1,4 @@
-class ImportsController < ApplicationController
+class ImportstesControllerRepo < ApplicationController
   before_action :set_import, only: %i[ show edit update destroy ]
 
   # GET /imports or /imports.json

@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_08_19_150651) do
 
   create_table "tb_import", charset: "utf8mb3", force: :cascade do |t|
+    t.float "total_files", comment: "Total de Arquivos"
     t.string "cdg_import", comment: "Indentificador unico do import"
     t.boolean "termino", default: false, comment: "Indentifica se terminou o processo"
     t.datetime "created_at", precision: 6, null: false
