@@ -70,7 +70,7 @@ class ImportsController < ApplicationController
         import_data = ImportDatum.create(path_file: '', tb_import_id: import.id)
 
         #atualiza path do arquivo a ser salvo
-        import_data.update_column(:path_file, "public/import/#{Date.today.strftime("%Y_%m_%d")}_#{import_data.id}")
+        import_data.update_column(:path_file, "#{Rails.root}/public/import/#{Date.today.strftime("%Y_%m_%d")}_#{import_data.id}")
         #Verifica se caminho Exite se nao cria
         # unless File.directory?('public/import')
         #   FileUtils.mkdir_p('public/import')
