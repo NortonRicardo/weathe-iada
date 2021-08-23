@@ -1,0 +1,29 @@
+<% files.order("id").each_with_index do |t, linha| %>
+  <div class="col-12" style="margin-bottom: 20px;">
+    <label>
+      Arquivo: <%= linha+1 %>
+      Total: <%= t.total.to_i %>
+      Sucess: <%= t.sucess.to_i %>
+      Erros: <%= t.erros.to_i %>
+      Statis: <%= t.finish ? 'Finalizado' : 'Processando' %>
+    </label>
+    <% total_feito = (t.sucess.to_i + t.erros.to_i) %>
+    <% porcentagem =  ((total_feito*100).to_i/t.total.to_i) %>
+    <% porcentagem = t.finish == true ? 100 : porcentagem %>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<%= porcentagem %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= porcentagem %>%"><%= porcentagem %>%</div>
+    </div>
+  </div>
+<% end %>
+
+<% if import.termino %>
+
+  <div class="col-12 row" style="margin-bottom: 20px;justify-content: center;">
+    <i class="mdi mdi-checkbox-marked-outline mdi-48px"></i>
+    <h2 style="color: #000;padding-bottom: 0;margin-bottom: 0;padding-top: 30px;">Finalizado</h2>
+  </div>
+  <div>
+    <%= link_to 'Voltar', new_import_path, class:"btn btn-primary" %>
+  </div>
+
+<% end %>

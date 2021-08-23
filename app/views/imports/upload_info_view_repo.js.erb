@@ -1,5 +1,5 @@
 <% if @import_data.present? %>
-$("#render_info_import").html("<%= j(render('progress_upload', files: @import_data, import: @import)) %>");
+  $("#render_info_import").html("<%= j(render('progress_upload', files: @import_data, import: @import)) %>");
 <% end %>
 
 
@@ -12,5 +12,5 @@ function pesquisa_status() {
 }
 
 <% unless @import&.termino == true %>
-pesquisa_status();
+  pesquisa_status();
 <% end  %>
