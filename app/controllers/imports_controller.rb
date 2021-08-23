@@ -69,21 +69,19 @@ class ImportsController < ApplicationController
         # cria o obj para import
         import_data = ImportDatum.create(path_file: '', tb_import_id: import.id)
 
-        #atualiza path do arquivo a ser salvo
-        import_data.update_column(:path_file, "#{Rails.root}/public/import/#{Date.today.strftime("%Y_%m_%d")}_#{import_data.id}")
         #Verifica se caminho Exite se nao cria
-        # unless File.directory?('public/import')
-        #   FileUtils.mkdir_p('public/import')
-        # end
+        unless File.directory?("#{Rails.root}/tmp/import")
+          FileUtils.mkdir_p("#{Rails.root}/tmp/import")
+        end
+        #atualiza path do arquivo a ser salvo
+        import_data.update_column(:path_file, "#{Rails.root}/tmp/import/#{Date.today.strftime("%Y_%m_%d")}_#{import_data.id}")
+
+        #   File.write("#{Rails.root}/tmp/import/luci.txt", 'tete norton')
+        #   File.exist?("#{Rails.root}/tmp/import/luci.txt")
+        #   Dir.entries("#{Rails.root}/tmp/import")
 
         #Salva o arquivo localmente para ser processardo no sidekiq
-        puts 'norton aqui processo de salvar '
-        puts 'File A'
-
-        a = File.write(import_data.path_file, file.read.force_encoding("UTF-8"))
-        puts a
-        puts 'VErifica se existe o arquivo A'
-        puts File.exist?(import_data.path_file)
+        File.write(import_data.path_file, file.read.force_encoding("UTF-8"))
         #counta quantas linhas tem o arquivo
         count_row = (File.open(file.tempfile.path)&.count-9)
         #atualiza objeto
