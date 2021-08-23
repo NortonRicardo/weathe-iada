@@ -69,23 +69,21 @@ class ImportsController < ApplicationController
         # cria o obj para import
         import_data = ImportDatum.create(path_file: '', tb_import_id: import.id)
 
-        #arualiza path do arquivo a ser salvo
-        import_data.update_column(:path_file, "#{Date.today.strftime("%Y_%m_%d")}_#{import_data.id}")
+        #atualiza path do arquivo a ser salvo
+        import_data.update_column(:path_file, "public/import/#{Date.today.strftime("%Y_%m_%d")}_#{import_data.id}")
         #Verifica se caminho Exite se nao cria
         # unless File.directory?('public/import')
         #   FileUtils.mkdir_p('public/import')
         # end
-        #monta caminho com nome do arquivo a ser processado
-        file_path_to_save_to = "public/import/#{import_data.path_file}"
+
         #Salva o arquivo localmente para ser processardo no sidekiq
         puts 'norton aqui processo de salvar '
         puts 'File A'
-        a = File.write(file_path_to_save_to, file.read.force_encoding("UTF-8"))
-        puts a
-        puts 'File B'
-        b = File.write(file_path_to_save_to+'_b', file_path_to_save_to)
-        puts b
 
+        a = File.write(import_data.path_file, file.read.force_encoding("UTF-8"))
+        puts a
+        puts 'VErifica se existe o arquivo A'
+        puts File.exist?(import_data.path_file)
         #counta quantas linhas tem o arquivo
         count_row = (File.open(file.tempfile.path)&.count-9)
         #atualiza objeto

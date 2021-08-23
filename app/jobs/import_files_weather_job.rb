@@ -21,11 +21,21 @@ class ImportFilesWeatherJob < ApplicationJob
   def mont_obg_dados(file)
     data = []
     @weather_station = nil
-    file_open = File.open("public/import/#{file.path_file}")
-    weather_station_params = {state: nil, region: nil, station: nil, wmo_code: nil, latitude: nil, altitude: nil, longitude: nil, foundation: nil}
+    # file_open = File.open("public/import/#{file.path_file}")
+
+    weather_station_params = {
+      state: nil,
+      region: nil,
+      station: nil,
+      wmo_code: nil,
+      latitude: nil,
+      altitude: nil,
+      longitude: nil,
+      foundation: nil
+    }
 
 
-    file_open.each_with_index do |linha_atual, linha|
+    File.open(file.path_file).each_with_index do |linha_atual, linha|
       # .encode!('UTF-8', 'UTF-8', invalid: :replace)
       row = linha_atual.gsub(':','').gsub("\n",'').split("\;")
 
