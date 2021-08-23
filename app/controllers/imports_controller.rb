@@ -65,23 +65,25 @@ class ImportsController < ApplicationController
       import = Import.create(cdg_import: cdg_import)
 
       #for para passar por todos arquivos
+      # FileUtils.rm_rf(Dir.glob('public/import/*'))
+      #Verifica se caminho Exite se nao cria
+      unless File.directory?("public/import")
+        FileUtils.mkdir_p("public/import")
+      end
+
       files.each_with_index do |file, linha|
         # cria o obj para import
         import_data = ImportDatum.create(path_file: '', tb_import_id: import.id)
 
-        #Verifica se caminho Exite se nao cria
-        unless File.directory?("#{Rails.root}/tmp/import")
-          FileUtils.mkdir_p("#{Rails.root}/tmp/import")
-        end
         #atualiza path do arquivo a ser salvo
-        import_data.update_column(:path_file, "#{Rails.root}/tmp/import/#{Date.today.strftime("%Y_%m_%d")}_#{import_data.id}")
+        import_data.update_column(:path_file, "public/import/file_#{import_data.id}")
 
         #   File.write("#{Rails.root}/tmp/import/luci.txt", 'tete norton')
         #   File.exist?("#{Rails.root}/tmp/import/luci.txt")
         #   Dir.entries("#{Rails.root}/tmp/import")
 
         #Salva o arquivo localmente para ser processardo no sidekiq
-        File.write(import_data.path_file, file.read.force_encoding("UTF-8"))
+        File.write(import_data.path_file.to_s, file.read.force_encoding("UTF-8"))
         #counta quantas linhas tem o arquivo
         count_row = (File.open(file.tempfile.path)&.count-9)
         #atualiza objeto

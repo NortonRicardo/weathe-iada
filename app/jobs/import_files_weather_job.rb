@@ -34,8 +34,9 @@ class ImportFilesWeatherJob < ApplicationJob
       foundation: nil
     }
 
+    files_row = File.open(file.path_file.to_s)
 
-    File.open(file.path_file).each_with_index do |linha_atual, linha|
+    files_row.each_with_index do |linha_atual, linha|
       # .encode!('UTF-8', 'UTF-8', invalid: :replace)
       row = linha_atual.gsub(':','').gsub("\n",'').split("\;")
 

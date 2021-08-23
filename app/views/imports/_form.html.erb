@@ -64,7 +64,7 @@
         document.getElementById('render_files').innerHTML = ''
 
         for (var i = 0; i < input.files.length; i++) {
-
+            sizeInMB = (input.files[i].size / (1024*1024)).toFixed(4);
           document.getElementById('render_files').innerHTML += '<div class="dropzone-previews mt-3">'+
             '<div class="card mt-1 mb-0 shadow-none border dz-processing dz-error dz-complete">'+
                     '<div class="p-2">'+
@@ -74,7 +74,7 @@
                             '</div>'+
                             '<div class="col pl-0">'+
                                 '<a href="javascript:void(0);"class="font-weight-bold"style="color: rgba(255, 255, 255, 0.8);" >'+ input.files[i].name +'</a>'+
-                                '<p class="mb-0" data-dz-size=""><strong>0.5</strong> MB</p>'+
+                                '<p class="mb-0" data-dz-size=""><strong>'+sizeInMB+'</strong> MB</p>'+
                             '</div>'+
                         '</div>'+
                     '</div>'+
