@@ -83,7 +83,7 @@ class ImportsController < ApplicationController
         #   Dir.entries("#{Rails.root}/tmp/import")
 
         #Salva o arquivo localmente para ser processardo no sidekiq
-        File.write(import_data.path_file.to_s, file.read.force_encoding("UTF-8"))
+        File.write(import_data.path_file.to_s, file.read.force_encoding("UTF-8").encode!('UTF-8', 'UTF-8', invalid: :replace))
         #counta quantas linhas tem o arquivo
         count_row = (File.open(file.tempfile.path)&.count-9)
         #atualiza objeto
