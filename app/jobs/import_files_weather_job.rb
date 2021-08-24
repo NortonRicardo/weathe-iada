@@ -45,7 +45,7 @@ class ImportFilesWeatherJob < ApplicationJob
     linha = 0
 
     files_row.each_line do |linha_atual|
-      row = linha_atual.gsub(':','').gsub("\n",'').split("\;")
+      row = linha_atual.encode!('UTF-8', 'UTF-8', :invalid => :replace).gsub(':','').gsub("\n",'').split("\;")
 
       case linha
       when 0
