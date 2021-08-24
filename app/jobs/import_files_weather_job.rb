@@ -3,34 +3,42 @@ class ImportFilesWeatherJob < ApplicationJob
   # redis-server
   # bundle exec sidekiq -q importFile -c 8
   def perform(*args)
-    @file_total_row = args.first.first
-    @import = Import.find(args.first.second.to_i)
+    @import = Import.find(args.first)
 
-    mont_files_importa_data(@file_total_row, @import)
+    mont_files_importa_data(@import)
 
     @import.update_column(:termino, true)
   end
 
   private
-  def mont_files_importa_data(hash_files, import)
-    hash_files.each_with_index do |file, linha|
-      import_data = import.import_datas.find_by(order_file: linha)
-
-      regitros, weather_station = mont_obg_dados(file)
-
-      save_weather_datum(regitros, weather_station, import_data)
+  def mont_files_importa_data(import)
+    import.import_datas.order('id').each do |file|
+      regitros = mont_obg_dados(file)
+      save_weather_datum(regitros, file)
     end
   end
 
   def mont_obg_dados(file)
     data = []
-    file_open = File.open(file)
-    weather_station_params = {state: nil, region: nil, station: nil, wmo_code: nil, latitude: nil, altitude: nil, longitude: nil, foundation: nil}
+    @weather_station = nil
+    # file_open = File.open("public/import/#{file.path_file}")
 
+    weather_station_params = {
+      state: nil,
+      region: nil,
+      station: nil,
+      wmo_code: nil,
+      latitude: nil,
+      altitude: nil,
+      longitude: nil,
+      foundation: nil
+    }
 
-    file_open.each_with_index do |linha_atual, linha|
+    files_row = File.open(file.path_file.to_s)
 
-      row = linha_atual.encode!('UTF-8', 'UTF-8', invalid: :replace).gsub(':','').gsub("\n",'').split("\;")
+    files_row.each_with_index do |linha_atual, linha|
+      # .encode!('UTF-8', 'UTF-8', invalid: :replace)
+      row = linha_atual.gsub(':','').gsub("\n",'').split("\;")
 
       case linha
       when 0
@@ -50,19 +58,19 @@ class ImportFilesWeatherJob < ApplicationJob
       when 7
         weather_station_params[:foundation] = row[1]
       when 8
-        # 'Nada'
+        @weather_station = WeatherStation.find_or_create_by(weather_station_params)
       else
-        data << mont_obj_weather_datum(row)
+        data << mont_obj_weather_datum(row, @weather_station)
       end
     end
 
-    weather_station = WeatherStation.find_or_create_by(weather_station_params)
+    # Apaga o arquivo que tinha cido salvo localmente
+    # FileUtils.rm_rf(Dir.glob("public/import/#{file.path_file}"))
 
-    return data, weather_station
-
+    return data
   end
 
-  def mont_obj_weather_datum(row)
+  def mont_obj_weather_datum(row, weather_station)
     if row.present?
       hora_convert = row[1].gsub(':', '').gsub(' UTC', '')
       hora_convert = hora_convert.chop.chop.insert(2, ':') if hora_convert.size == 6
@@ -86,15 +94,14 @@ class ImportFilesWeatherJob < ApplicationJob
                                   umid_relativa_ar: row[15],
                                   vento_direcao_horario: row[16],
                                   vento_rajada_maxima: row[17],
-                                  vento_velocidade_horario: row[18])
+                                  vento_velocidade_horario: row[18],
+                                  tb_weather_station_id: weather_station.id)
       return obg
     end
   end
 
-  def save_weather_datum(registros, weather_station, import_data)
+  def save_weather_datum(registros, import_data)
     registros.each_with_index do |registro, index|
-
-      registro.tb_weather_station_id = weather_station.id
 
       if registro.save
         import_data.update_column(:sucess, import_data.sucess+1)

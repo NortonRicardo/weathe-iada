@@ -1,25 +1,20 @@
 class WeatherStationsController < ApplicationController
   before_action :set_weather_station, only: %i[ show edit update destroy ]
 
-  # GET /weather_stations or /weather_stations.json
   def index
     @weather_stations = WeatherStation.all
   end
 
-  # GET /weather_stations/1 or /weather_stations/1.json
   def show
   end
 
-  # GET /weather_stations/new
   def new
     @weather_station = WeatherStation.new
   end
 
-  # GET /weather_stations/1/edit
   def edit
   end
 
-  # POST /weather_stations or /weather_stations.json
   def create
     @weather_station = WeatherStation.new(weather_station_params)
 
@@ -34,7 +29,6 @@ class WeatherStationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /weather_stations/1 or /weather_stations/1.json
   def update
     respond_to do |format|
       if @weather_station.update(weather_station_params)
@@ -47,7 +41,6 @@ class WeatherStationsController < ApplicationController
     end
   end
 
-  # DELETE /weather_stations/1 or /weather_stations/1.json
   def destroy
     @weather_station.destroy
     respond_to do |format|
@@ -57,12 +50,10 @@ class WeatherStationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_weather_station
       @weather_station = WeatherStation.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def weather_station_params
       params.require(:weather_station).permit(:region, :state, :station, :wmo_code, :latitude, :longitude, :altitude, :foundation)
     end
