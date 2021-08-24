@@ -20,5 +20,12 @@
 
 <!--    <script>swal("My title", "My description", "success");</script>-->
 <!--    <script>swal("My title", "My description", "error");</script>-->
+
+    <% flash.each do |type, msg| %>
+      <script>
+          swal("<%= type.capitalize %>", "<%= msg %>", "<%= type %>");
+      </script>
+    <% end %>
+
   </body>
 </html>

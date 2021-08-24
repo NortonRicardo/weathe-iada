@@ -55,33 +55,14 @@ class ImportsController < ApplicationController
 
   private
   def read_file_mont_hash(files, cdg_import)
-    #create impor com cdg_import
+
     import = Import.create(cdg_import: cdg_import)
 
-    #for para passar por todos arquivos
-    # FileUtils.rm_rf(Dir.glob('public/import/*'))
-    #Verifica se caminho Exite se nao cria
-    unless File.directory?("public/import")
-      FileUtils.mkdir_p("public/import")
-    end
-
     files.each_with_index do |file, linha|
-      # cria o obj para import
-      import_data = ImportDatum.create(path_file: '', tb_import_id: import.id)
-
-      #atualiza path do arquivo a ser salvo
-      import_data.update_column(:path_file, "public/import/file_#{import_data.id}")
-
-      #   File.write("#{Rails.root}/tmp/import/luci.txt", 'tete norton')
-      #   File.exist?("#{Rails.root}/tmp/import/luci.txt")
-      #   Dir.entries("#{Rails.root}/tmp/import")
-
-      #Salva o arquivo localmente para ser processardo no sidekiq
-      File.write(import_data.path_file.to_s, file.read.force_encoding("UTF-8").encode!('UTF-8', 'UTF-8', invalid: :replace))
-      #counta quantas linhas tem o arquivo
       count_row = (File.open(file.tempfile.path)&.count-9)
-      #atualiza objeto
-      import_data.update_column(:total, count_row)
+      import_data = ImportDatum.create( total: count_row, tb_import_id: import.id)
+      import_data.file.purge
+      import_data.file.attach(file)
     end
     return import
   end
