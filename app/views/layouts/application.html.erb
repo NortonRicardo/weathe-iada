@@ -22,7 +22,10 @@
 <!--    <script>swal("My title", "My description", "error");</script>-->
 
     <% flash.each do |type, msg| %>
+      <% type = 'warning' if type == 'alert' %>
+      <% type = 'info' if type == 'notice' %>
       <script>
+          <!--    ["success","error","warning","info"]-->
           swal("<%= type.capitalize %>", "<%= msg %>", "<%= type %>");
       </script>
     <% end %>
