@@ -1,7 +1,9 @@
 class ImportFilesWeatherJob < ApplicationJob
   queue_as :importFile
+
   # redis-server
   # bundle exec sidekiq -q importFile -c 8
+
   def perform(*args)
     @import = Import.find(args.first)
 
@@ -21,7 +23,6 @@ class ImportFilesWeatherJob < ApplicationJob
   def mont_obg_dados(file)
     data = []
     @weather_station = nil
-    # file_open = File.open("public/import/#{file.path_file}")
 
     weather_station_params = {
       state: nil,
@@ -34,10 +35,16 @@ class ImportFilesWeatherJob < ApplicationJob
       foundation: nil
     }
 
-    files_row = File.open(file.path_file.to_s)
+    # Cria Rota Segundo id do arquivo
+    file_path_to_save_to = "public/import/file_import_#{file.id}"
+    # Salva o arquivo localmente
+    File.write(file_path_to_save_to, file.file_dowlod.force_encoding("UTF-8"))
+    # Faz leitura do arquivo salvo
+    files_row = File.read(file_path_to_save_to)
+    # contador de linha
+    linha = 0
 
-    files_row.each_with_index do |linha_atual, linha|
-      # .encode!('UTF-8', 'UTF-8', invalid: :replace)
+    files_row.each_line do |linha_atual|
       row = linha_atual.gsub(':','').gsub("\n",'').split("\;")
 
       case linha
@@ -62,10 +69,10 @@ class ImportFilesWeatherJob < ApplicationJob
       else
         data << mont_obj_weather_datum(row, @weather_station)
       end
+      linha += 1
     end
 
-    # Apaga o arquivo que tinha cido salvo localmente
-    # FileUtils.rm_rf(Dir.glob("public/import/#{file.path_file}"))
+    FileUtils.rm_rf(Dir.glob(file_path_to_save_to))
 
     return data
   end

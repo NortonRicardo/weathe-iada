@@ -4,6 +4,11 @@ class ImportDatum < ApplicationRecord
   self.sequence_name = "tb_import_data_seq"
   # relationships .............................................................
   belongs_to :import, class_name: 'Import', foreign_key: :tb_import_id
+  has_one_attached :file
   # validations ...............................................................
   # callbacks .................................................................
+  #
+  def file_dowlod
+    self.file.download
+  end
 end
