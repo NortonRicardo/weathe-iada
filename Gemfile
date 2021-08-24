@@ -9,6 +9,7 @@ gem 'pg', '~> 1.1'
 # Use mysql as the database for Active Record
 # gem 'rack-timeout'
 gem 'mysql2'
+gem 'aws-sdk-s3'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
