@@ -21,6 +21,11 @@ class ImportsController < ApplicationController
     @import_data = @import&.import_datas
   end
 
+  def dispara_job
+    ImportFilesWeatherJob.perform_later(params[:id])
+  end
+
+
   def create
     if params.present? && params[:import].present? && params[:import][:data].present?
 

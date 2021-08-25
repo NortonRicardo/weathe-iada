@@ -1,13 +1,12 @@
 class WeatherStationsController < ApplicationController
   before_action :set_weather_station, only: %i[ show edit update destroy ]
+  before_action :params_search, only: %i[ index]
 
   def index
-    @weather_stations = WeatherStation.all.paginate(page: params[:page], per_page: 10)
-    @weather_stations_search = WeatherStation.new()
-    @region = WeatherStation.all.collect{ |t| [t.region,t.region_to_s]}.uniq
-    @estado = WeatherStation.all.collect{ |t| t.state }.uniq
-    @cidade = WeatherStation.all.collect{ |t| t.station }.uniq
-    @wmo = WeatherStation.all.collect{ |t| t.wmo_code }.uniq
+    @weather_stations = WeatherStation
+                          .all
+                          .paginate(page: params[:page],
+                                    per_page: 10)
   end
 
   def show
@@ -62,4 +61,19 @@ class WeatherStationsController < ApplicationController
     def weather_station_params
       params.require(:weather_station).permit(:region, :state, :station, :wmo_code, :latitude, :longitude, :altitude, :foundation)
     end
+
+  def params_search
+    @weather_stations_search = WeatherStation.new()
+    @region = WeatherStation.all.collect{ |t| [t.region,t.region_to_s]}.uniq
+    @estado = WeatherStation.all.collect{ |t| t.state }.uniq
+    @cidade = WeatherStation.all.collect{ |t| t.station }.uniq
+    @wmo = WeatherStation.all.collect{ |t| t.wmo_code }.uniq
+
+    if params[:weather_station].present?
+      @wmo_params = params[:weather_station][:wmo_code].compact_blank
+      @region_params = params[:weather_station][:region]
+      @state_params = params[:weather_station][:state]
+      @station_params = params[:weather_station][:station]
+    end
+  end
 end

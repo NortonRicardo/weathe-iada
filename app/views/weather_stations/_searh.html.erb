@@ -2,7 +2,8 @@
 <%#= f.select :location, grouped_options_for_select(grouped_options) %>
 
 <%= form_with model: @weather_stations_search,
-              url: weather_stations_path do |form| %>
+              url: weather_stations_path,
+              method: :get do |form| %>
   <div class="row">
   <div class="col-12">
     <div class="card">
@@ -55,7 +56,11 @@
               <input type="text" class="form-control" data-provide="datepicker">
             </div>
           </div>
+          <div class="actions" style="    margin-left: auto;padding-right: 60px;padding-top: 33px;">
+            <%= form.submit "Filtrar", class: 'btn btn-sucess'%>
+          </div>
         </div>
+
 
       </div>
     </div>

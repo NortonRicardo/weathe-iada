@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :imports do
     get 'upload_info_view', on: :collection
+    get 'dispara_job', on: :collection
   end
 
   root to: 'main#index'

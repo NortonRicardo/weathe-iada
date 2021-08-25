@@ -14,9 +14,16 @@ class ImportFilesWeatherJob < ApplicationJob
 
   private
   def mont_files_importa_data(import)
-    import.import_datas.order('id').each do |file|
+    import.import_datas.where(finish: false).order('id').each do |file|
+
+      file.update_column(:sucess, 0.0)
+      file.update_column(:erros, 0.0)
+
       regitros = mont_obg_dados(file)
+
       save_weather_datum(regitros, file)
+
+      file.update_column(:finish, true)
     end
   end
 
@@ -112,10 +119,11 @@ class ImportFilesWeatherJob < ApplicationJob
 
       if registro.save
         import_data.update_column(:sucess, import_data.sucess+1)
-        puts "------------------------ #{import_data.sucess} - Salvou - #{import_data.erros} ------------------------"
+        puts "------------------------ #{index} - Salvou - #{import_data.erros} ------------------------"
       else
         import_data.update_column(:erros, import_data.erros+1)
-        puts "************************ #{index} - ERROR ************************"
+        puts "************************************************************************************************ #{index} - ERROR ************************************************************************************************"
+        puts "MESAGEM_ERROR: #{registro.errors.full_messages.to_sentence}"
       end
 
     end
