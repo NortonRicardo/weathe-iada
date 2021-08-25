@@ -3,6 +3,11 @@ class WeatherStationsController < ApplicationController
 
   def index
     @weather_stations = WeatherStation.all.paginate(page: params[:page], per_page: 10)
+    @weather_stations_search = WeatherStation.new()
+    @region = WeatherStation.all.collect{ |t| [t.region,t.region_to_s]}.uniq
+    @estado = WeatherStation.all.collect{ |t| t.state }.uniq
+    @cidade = WeatherStation.all.collect{ |t| t.station }.uniq
+    @wmo = WeatherStation.all.collect{ |t| t.wmo_code }.uniq
   end
 
   def show

@@ -5,10 +5,10 @@
 <table class="table table-striped table-dark shadow rounded table-hover table-centered ">
   <thead>
     <tr>
+      <th scope="col">Wmo</th>
       <th scope="col">Região</th>
       <th scope="col">Estado</th>
       <th scope="col">Cidade</th>
-      <th scope="col">Wmo</th>
       <th scope="col">Dta Fundação</th>
       <th colspan="3">Ação</th>
     </tr>
@@ -17,10 +17,10 @@
   <tbody>
     <% @weather_stations.each do |weather_station| %>
       <tr>
+        <td><%= weather_station.wmo_code %></td>
         <td><%= weather_station.region_to_s %></td>
         <td><%= weather_station.state %></td>
         <td><%= weather_station.station %></td>
-        <td><%= weather_station.wmo_code %></td>
         <td><%= weather_station.foundation.strftime("%d/%m/%Y") %></td>
         <td>
           <%= render 'layouts/buttons_acao', data: weather_station, url: edit_import_path(weather_station) %>
