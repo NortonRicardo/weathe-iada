@@ -2,7 +2,7 @@ class WeatherStationsController < ApplicationController
   before_action :set_weather_station, only: %i[ show edit update destroy ]
 
   def index
-    @weather_stations = WeatherStation.all
+    @weather_stations = WeatherStation.all.paginate(page: params[:page], per_page: 10)
   end
 
   def show

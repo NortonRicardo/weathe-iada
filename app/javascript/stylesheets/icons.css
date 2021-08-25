@@ -645,6 +645,9 @@ File: Icons Css File
   font-weight: normal;
   font-style: normal; }
 
+.mdi{
+  color: rgba(255, 255, 255, 0.7);
+}
 .mdi:before,
 .mdi-set {
   display: inline-block;

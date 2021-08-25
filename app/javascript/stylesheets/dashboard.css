@@ -2008,10 +2008,10 @@ pre code {
   background-color: #e9ecef;
   border-color: #e3e3e3;
 }
-
+/*color: #98a6ad;*/
 .table-dark {
-  color: #1e1e2f;
-  background-color: #212529;
+  color: #98a6ad;
+  background-color: #1e1e2d;
 }
 
 .table-dark th,
@@ -20490,7 +20490,8 @@ Copyright (c) 2015 Daniel Eden
 
 .select2-dropdown {
   background-color: #27293d;
-  border: 1px solid #aaa;
+  /*border: 1px solid #aaa;*/
+  border: 1px solid #2b3553;
   border-radius: 4px;
   box-sizing: border-box;
   display: block;
@@ -20510,12 +20511,16 @@ Copyright (c) 2015 Daniel Eden
   background-color: #27293d;
   color: #ffff!important;
   border-radius: 4px;
+  height: 36px;
+  padding-top: 3px;
 }
 .select2-container--default .select2-selection--single {
-  background-color: #fff;
-  border: 1px solid #aaa;
+  /*background-color: #fff;*/
+  /*border: 1px solid #aaa;*/
+  background-color: #2b3553;
+  border: 1px solid #2b3553;
   border-radius: 4px;
-  height: 30px;
+  height: 38px;
 }
 .select2-container--default .select2-search--dropdown .select2-search__field {
   border: 1px solid #aaa;
@@ -20572,5 +20577,71 @@ Copyright (c) 2015 Daniel Eden
   box-shadow: none;
   -webkit-appearance: textfield;
   color: #fff;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: #92929a;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #92929a;
+}
+
+.pagination span.previous_page {
+  color: #92929a;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 1px solid #92929a;
+}
+.pagination span.next_page {
+  color: #92929a;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #92929a;
+}
+
+.pagination em.current {
+  /*background-color: #4CAF50;*/
+  background: -webkit-linear-gradient(0deg, #27293d 0%, #008df1 100%);
+  background: -o-linear-gradient(0deg, #27293d 0%, #008df1 100%);
+  background: -moz-linear-gradient(0deg, #27293d 0%, #008df1 100%);
+  background: linear-gradient(0deg, #27293d 0%, #008df1 100%);
+  color: #ffffff!important;
+  border: 1px solid #92929a;
+  font-weight: 900!important;
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #92929a;
+}
+
+.pagination a:hover:not(.active) {background-color: #92929a;}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.container_paginate
+{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
 }
 /*# sourceMappingURL=dashboard-free.css.map */

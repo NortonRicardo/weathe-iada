@@ -1,41 +1,39 @@
-<p id="notice"><%= notice %></p>
+<h1>Estações Meteorológicas</h1>
 
-<h1>Weather Stations</h1>
+<%= render 'searh' %>
 
-<table>
+<table class="table table-striped table-dark shadow rounded table-hover table-centered ">
   <thead>
     <tr>
-      <th>Region</th>
-      <th>State</th>
-      <th>Station</th>
-      <th>Wmo code</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th>Altitude</th>
-      <th>Foundation</th>
-      <th colspan="3"></th>
+      <th scope="col">Região</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Cidade</th>
+      <th scope="col">Wmo</th>
+      <th scope="col">Dta Fundação</th>
+      <th colspan="3">Ação</th>
     </tr>
   </thead>
 
   <tbody>
     <% @weather_stations.each do |weather_station| %>
       <tr>
-        <td><%= weather_station.region %></td>
+        <td><%= weather_station.region_to_s %></td>
         <td><%= weather_station.state %></td>
         <td><%= weather_station.station %></td>
         <td><%= weather_station.wmo_code %></td>
-        <td><%= weather_station.latitude %></td>
-        <td><%= weather_station.longitude %></td>
-        <td><%= weather_station.altitude %></td>
-        <td><%= weather_station.foundation %></td>
-        <td><%= link_to 'Show', weather_station %></td>
-        <td><%= link_to 'Edit', edit_weather_station_path(weather_station) %></td>
-        <td><%= link_to 'Destroy', weather_station, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= weather_station.foundation.strftime("%d/%m/%Y") %></td>
+        <td>
+          <%= render 'layouts/buttons_acao', data: weather_station, url: edit_import_path(weather_station) %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<div class="container_paginate">
+  <%= will_paginate @weather_stations,
+                    previous_label: '<i class="mdi mdi-arrow-left-bold"></i>',
+                    next_label: '<i class="mdi mdi-arrow-right-bold"></i>' %>
+</div>
 
-<%= link_to 'New Weather Station', new_weather_station_path %>
+<%#= link_to 'New Weather Station', new_weather_station_path %>

@@ -14,5 +14,20 @@ class WeatherStation < ApplicationRecord
                         :longitude,
                         :altitude
   # callbacks .................................................................
-
+  def region_to_s
+    case self.region.upcase
+    when 'S'
+      'Sul'
+    when 'N'
+      'Norte'
+    when 'SE'
+      'Sudeste'
+    when 'NE'
+      'Nordeste'
+    when 'CO'
+      'Centro Oeste'
+    else
+      self.region
+    end
+  end
 end

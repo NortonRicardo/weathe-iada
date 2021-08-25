@@ -1,3 +1,10 @@
+<style>
+    .esconde
+    {
+        display: none;
+    }
+</style>
+
 <div class="sidebar">
   <div class="sidebar-wrapper">
     <div class="logo">
@@ -7,21 +14,63 @@
       </a>
     </div>
     <ul class="nav">
-      <li class="active-pro">
-        <a href="/imports/new" class="link_menu">
-          <i class="mdi mdi-application-import mdi-24px" style="margin-right: 10px;"></i>
-          <p class="title_menu">Import. de Dados</p>
-        </a>
-      </li>
 
+      <div class="menu">
+        <li class="active-pro">
+          <a href="javascript:void(0)" class="link_menu importacao" onclick="">
+            <i class="mdi mdi-application-import mdi-24px" style="margin-right: 10px;"></i>
+            <p class="title_menu">Importação</p>
+          </a>
+          <ul class="esconde" style="list-style: none;padding-left: 4px;" id='importacao'>
+            <li>
+              <a href="/imports/new" class="link_menu">
+                <i class="mdi mdi-import mdi-18px"></i>
+                <p class="title_menu">Import. de Dados</p>
+              </a>
+            </li>
+            <li>
+              <a href="/imports" class="link_menu">
+                <i class="mdi mdi-format-list-bulleted-square mdi-18px"></i>
+                <p class="title_menu">Lista de importação</p>
+              </a>
+            </li>
+            <li>
+              <%= link_to sidekiq_web_path, class:"link_menu" do %>
+                <i class="mdi mdi-database-import mdi-18px" style="margin-right: 10px;"></i>
+                <p class="title_menu">Sidekiq</p>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      </div>
 
       <li class="active-pro">
-        <%= link_to sidekiq_web_path, class:"link_menu" do %>
-          <i class="mdi mdi-database-import mdi-24px" style="margin-right: 10px;"></i>
-          <p class="title_menu">Sidekiq</p>
+        <%= link_to weather_stations_path, class:"link_menu" do %>
+          <i class="mdi mdi-jquery mdi-18px"></i>
+          <p class="title_menu">Estações Met.</p>
         <% end %>
       </li>
+
 
     </ul>
   </div>
 </div>
+
+<script>
+    $('.importacao').on('click', function() {
+        if ($('#importacao')[0].className)
+        {
+            $('#importacao').removeClass("esconde");
+        }
+        else
+        {
+            $('#importacao').addClass("esconde");
+        }
+    });
+
+    $('.menu-link').each(function() {
+        $(this).on('click', function() {
+            $('#menu').slideToggle('slow');
+        });
+    });
+</script>

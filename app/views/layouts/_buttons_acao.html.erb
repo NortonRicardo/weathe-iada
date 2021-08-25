@@ -1,0 +1,11 @@
+<%= link_to data do %>
+  <i class="mdi mdi-folder-open mdi-18px"></i>
+<% end %>
+
+<%= link_to url do %>
+  <i class="mdi mdi-square-edit-outline mdi-18px"></i>
+<% end %>
+
+<%= link_to data, method: :delete, data: { confirm: 'Are you sure?' } do %>
+  <i class="mdi mdi-delete-outline mdi-18px"></i>
+<% end %>
