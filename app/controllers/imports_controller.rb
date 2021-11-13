@@ -29,9 +29,13 @@ class ImportsController < ApplicationController
   def create
     if params.present? && params[:import].present? && params[:import][:data].present?
 
-      @import = read_file_mont_hash(params[:import][:data], params[:import][:cdg_import])
+      @import = read_file_mont_hash(params[:import][:data],
+                                    params[:import][:cdg_import])
 
-      ImportFilesWeatherJob.perform_later(@import.id)
+      ImportFilesWeatherJob
+        .perform_later(@import.id) if @import.present?
+
+      redirect_to imports_path, notice: "Arquivos Importados!!!"
 
     else
       redirect_to new_import_path, notice: "Nenhum Arquivo Selecionado"
@@ -69,6 +73,7 @@ class ImportsController < ApplicationController
       import_data.file.purge
       import_data.file.attach(file)
     end
+
     return import
   end
 
