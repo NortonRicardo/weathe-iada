@@ -3,9 +3,13 @@ class WeatherDatum < ApplicationRecord
   self.table_name = "tb_weather_data"
   self.sequence_name = "tb_weather_data_seq"
   # relationships .............................................................
-  belongs_to :weather_station, class_name: 'WeatherStation', foreign_key: :tb_weather_station_id
+  belongs_to :weather_station,
+             class_name: 'WeatherStation',
+             foreign_key: :tb_weather_station_id
   # validations ...............................................................
-  validates_presence_of :data, :hora, :tb_weather_station_id
+  validates_presence_of :data,
+                        :hora,
+                        :tb_weather_station_id
   # callbacks .................................................................
   before_create :set_ano_mes
   before_validation :validates_presence_data_hora_wather_station
@@ -52,7 +56,9 @@ class WeatherDatum < ApplicationRecord
     end
 
   def validates_presence_data_hora_wather_station
-    obj = WeatherDatum.find_by(data: self.data, hora: self.hora, tb_weather_station_id: self.tb_weather_station_id)
+    obj = WeatherDatum.find_by(data: self.data,
+                               hora: self.hora,
+                               tb_weather_station_id: self.tb_weather_station_id)
     if obj.present?
       self.errors.add(:base, 'Registro já consta no sistema!!!!!!')
     end
