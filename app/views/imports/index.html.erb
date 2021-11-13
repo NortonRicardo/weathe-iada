@@ -6,6 +6,7 @@
 <table class="table table-striped table-dark shadow rounded">
   <thead>
     <tr>
+      <th scope="col">ID</th>
       <th scope="col">Código</th>
       <th scope="col">Finalizado</th>
       <th scope="col">Data Criação</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @imports.each do |import| %>
       <tr>
+        <td><%= import.id %></td>
         <td><%= import.cdg_import %></td>
         <td><%= import.termino ? 'True' : 'False' %></td>
         <td><%= import.created_at.strftime("%d/%m/%Y") %></td>
