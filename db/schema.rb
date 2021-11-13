@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_24_145935) do
+ActiveRecord::Schema.define(version: 2021_11_13_150427) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 2021_08_24_145935) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tb_import_id"], name: "index_tb_import_data_on_tb_import_id"
+  end
+
+  create_table "tb_log_error", charset: "utf8mb3", force: :cascade do |t|
+    t.boolean "treated", default: false, comment: "Se o Erro já foi Tratado"
+    t.text "data", comment: "Conteudo em Json"
+    t.string "tipo", comment: "Tipo de erro"
+    t.string "error", comment: "ERRO"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tb_weather_data", charset: "utf8mb3", force: :cascade do |t|
