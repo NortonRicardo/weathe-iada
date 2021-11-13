@@ -9,10 +9,7 @@ class WeatherStation < ApplicationRecord
   validates_presence_of :region,
                         :state,
                         :station,
-                        :wmo_code,
-                        :latitude,
-                        :longitude,
-                        :altitude
+                        :wmo_code
   # callbacks .................................................................
   def region_to_s
     case self.region.upcase
