@@ -5,11 +5,26 @@ ruby '3.0.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+# gem 'pg', '~> 1.1'
 # Use mysql as the database for Active Record
 # gem 'rack-timeout'
-gem 'mysql2'
-gem 'aws-sdk-s3'
+gem 'mysql2', '~> 0.5.3'
+
+# brew extract --version 1.22.4 yarn homebrew/cask
+# brew install yarn@1.22.4
+# yarn add bootstrap@5.0.0-beta2
+# sudo yarn add @popperjs/core@2.0.0-alpha.1
+# sudo npm install
+#
+# brew install node@14
+# brew services restart mysql
+# brew install mysql2
+# brew services start mysql2
+# npm install
+# bundle config --local build.mysql2 "--with-ldflags=-L/usr/local/opt/openssl/lib --with-cppflags=-I/usr/local/opt/openssl/include"
+
+
+gem 'aws-sdk-s3', '~> 1.104'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -29,17 +44,18 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'will_paginate', '~> 3.3.1'
-gem 'will_paginate-bootstrap'
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.2'
 
-gem 'redis'
-gem 'sidekiq'
+gem 'redis', '~> 4.5', '>= 4.5.1'
+gem 'sidekiq', '~> 6.2', '>= 6.2.2'
 
-gem 'devise'
+gem 'devise', '~> 4.8'
 # Para tratamento de arquivo csv
-gem 'roo'
+gem 'rubyzip', '>= 2.3.2'
+gem 'roo', '>= 2.8.3'
 gem 'axlsx'
-gem 'axlsx_rails'
-gem 'axlsx_styler'
+gem 'axlsx_rails', '~> 0.6.1'
+gem 'axlsx_styler', '~> 1.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -56,15 +72,15 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 3.0'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 4.0', '>= 4.0.3'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'webdrivers', '~> 5.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
