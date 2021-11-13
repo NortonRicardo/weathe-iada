@@ -7,9 +7,14 @@ class ImportFilesWeatherJob < ApplicationJob
   def perform(*args)
     @import = Import.find(args.first)
 
-    mont_files_importa_data(@import)
-
-    @import.update_column(:termino, true)
+    if @import.present?
+      mont_files_importa_data(@import)
+      @import.update_column(:termino, true)
+    else
+      save_error("#{args}",
+                 "#{Import.table_name}",
+                 "ERROR PARAMENTROS DO JOB")
+    end
   end
 
   private
@@ -51,6 +56,8 @@ class ImportFilesWeatherJob < ApplicationJob
     # contador de linha
     linha = 0
 
+
+
     files_row.each_line do |linha_atual|
       row = linha_atual.encode!('UTF-8', 'UTF-8', :invalid => :replace).gsub(':','').gsub("\n",'').split("\;")
 
@@ -72,9 +79,36 @@ class ImportFilesWeatherJob < ApplicationJob
       when 7
         weather_station_params[:foundation] = row[1]
       when 8
-        @weather_station = WeatherStation.find_or_create_by(weather_station_params)
+        begin
+          @weather_station = WeatherStation
+                               .find_or_create_by(state: weather_station_params[:state],
+                                                  region: weather_station_params[:region],
+                                                  station: weather_station_params[:station],
+                                                  wmo_code: weather_station_params[:wmo_code])
+          if @weather_station.id.present?
+            @weather_station.update_column(:latitude, weather_station_params[:latitude]) if weather_station_params[:latitude].present?
+            @weather_station.update_column(:altitude, weather_station_params[:altitude]) if weather_station_params[:altitude].present?
+            @weather_station.update_column(:longitude, weather_station_params[:longitude]) if weather_station_params[:longitude].present?
+            @weather_station.update_column(:foundation, weather_station_params[:foundation]) if weather_station_params[:foundation].present? && valid_date(weather_station_params[:foundation])
+          else
+            save_error([data: weather_station_params, Import: @import.id].to_json,
+                       "#{WeatherStation.table_name}",
+                       "objecto não criado - #{@weather_station.errors.full_messages.to_sentence}")
+          end
+        rescue StandardError => e
+          save_error([data: weather_station_params, Import: @import.id].to_json,
+                     "#{WeatherStation.table_name}",
+                     "#{e}")
+        end
+
       else
-        data << mont_obj_weather_datum(row, @weather_station)
+        if @weather_station.present? && @weather_station.id.present?
+          data << mont_obj_weather_datum(row, @weather_station)
+        else
+          save_error([data: row, Import: @import.id].to_json,
+                     "#{WeatherStation.table_name} - DADO PERDIDO",
+                     "@weather_station Not Presention")
+        end
       end
       linha += 1
     end
@@ -82,6 +116,21 @@ class ImportFilesWeatherJob < ApplicationJob
     FileUtils.rm_rf(Dir.glob(file_path_to_save_to))
 
     return data
+  end
+
+  def valid_date(date)
+    begin
+      Date.parse(date)
+      return  true
+    rescue ArgumentError
+      return  false
+    end
+  end
+
+  def save_error(data, tipo, error)
+    LogError.create(data: data,
+                    tipo: tipo,
+                    error: error)
   end
 
   def mont_obj_weather_datum(row, weather_station)
@@ -122,8 +171,11 @@ class ImportFilesWeatherJob < ApplicationJob
         puts "------------------------ #{index} - Salvou - #{import_data.erros} ------------------------"
       else
         import_data.update_column(:erros, import_data.erros+1)
-        puts "************************************************************************************************ #{index} - ERROR ************************************************************************************************"
-        puts "MESAGEM_ERROR: #{registro.errors.full_messages.to_sentence}"
+        save_error([data: registro,
+                    Import: @import.id].to_json,
+                   "WeatherDatum",
+                   "#{registro.errors.full_messages.to_sentence}")
+        puts "************************************************************************************************ MESAGEM_ERROR: #{registro.errors.full_messages.to_sentence} ************************************************************************************************"
       end
 
     end
